@@ -2,4 +2,18 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--Empty Drop Image-->
+    <dimen name="iv_logo_size">192dp</dimen>
+    <dimen name="iv_logo_margin">84dp</dimen>
+
+    <!--Button Add Drop-->
+    <dimen name="btn_add_stroke_width">1dp</dimen>
+    <dimen name="btn_add_layout_margin">24dp</dimen>
+    <dimen name="btn_add_text_size">28sp</dimen>
+    <dimen name="btn_add_hor_padding">60dp</dimen>
+    <dimen name="btn_add_ver_padding">8dp</dimen>
+    <dimen name="btn_add_corner_radius_purple">5dp</dimen>
+    <dimen name="btn_add_corner_radius_green">5dp</dimen>
+
 </resources>
