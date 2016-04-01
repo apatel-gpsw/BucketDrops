@@ -16,4 +16,14 @@
     <dimen name="btn_add_corner_radius_purple">5dp</dimen>
     <dimen name="btn_add_corner_radius_green">5dp</dimen>
 
+
+    <dimen name="tv_title_margin">10dp</dimen>
+    <dimen name="tv_text_title">14sp</dimen>
+    <dimen name="dialog_btn_size">10dp</dimen>
+    <dimen name="et_margin">10dp</dimen>
+
+    <!--row_drop-->
+    <dimen name="row_image_size">12dp</dimen>
+    <dimen name="row_textview_padding">22dp</dimen>
+
 </resources>

@@ -3,4 +3,5 @@
     <string name="add_drop">Add Drop</string>
     <string name="btn_add_font_family">sans-serif-thin</string>
     <string name="iv_image_description">IV Image</string>
+    <string name="et_hint_drop">What is this?</string>
 </resources>
