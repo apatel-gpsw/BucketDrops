@@ -16,19 +16,29 @@ import com.bumptech.glide.Glide;
 import com.example.akash.bucketdrops.beans.Drop;
 
 import adapters.AdapterDrops;
+import adapters.AddListener;
+import adapters.Divider;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
+import widgets.BucketRecyclerView;
 
 public class ActivityMain extends AppCompatActivity {
 
     private static final String TAG = "Akash";
     private Toolbar mToolBar;
     private Button mBtnAdd;
-    private RecyclerView mRecyclerView;
+    private BucketRecyclerView mRecyclerView;
     Realm mRealm;
     RealmResults<Drop> mRealmResults;
     AdapterDrops mAdapter;
+    View mEmptyView;
+    private AddListener addListener = new AddListener() {
+        @Override
+        public void add() {
+            showDialogAdd();
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +47,22 @@ public class ActivityMain extends AppCompatActivity {
         mToolBar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
 
+        mEmptyView = findViewById(R.id.empty_drops);
         initBackGroundImage();
 
-        mRecyclerView = (RecyclerView) findViewById(R.id.rv_drops);
+        mRecyclerView = (BucketRecyclerView) findViewById(R.id.rv_drops);
+        mRecyclerView.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
+
+        mRecyclerView.hideIfEmpty(mToolBar);
+        mRecyclerView.showIfEmpty(mEmptyView);
         LinearLayoutManager manager = new LinearLayoutManager(this);
 
         mRealm = Realm.getDefaultInstance();
         mRealmResults = mRealm.where(Drop.class).findAllAsync();
-        mAdapter = new AdapterDrops(this, mRealmResults);
+        mAdapter = new AdapterDrops(this, mRealmResults, addListener);
 
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
-
 
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mBtnAdd.setOnClickListener(new View.OnClickListener() {

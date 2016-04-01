@@ -26,4 +26,11 @@
     <dimen name="row_image_size">12dp</dimen>
     <dimen name="row_textview_padding">22dp</dimen>
 
+    <!--Footer-->
+    <dimen name="footer_margin_vertical">128dp</dimen>
+    <dimen name="footer_margin_horizontal">60dp</dimen>
+    <dimen name="drop_text_size">16sp</dimen>
+    <dimen name="bucket_list_left">12dp</dimen>
+    <dimen name="bucket_list_right">24dp</dimen>
+
 </resources>
