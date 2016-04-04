@@ -12,14 +12,17 @@ import android.widget.TextView;
 import com.example.akash.bucketdrops.R;
 import com.example.akash.bucketdrops.beans.Drop;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
+import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
  * Created by knighthood on 3/31/2016.
  */
-public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements SwipeListener {
 
     public static final int ITEM = 0;
     public static final int FOOTER = 1;
@@ -28,15 +31,20 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     private LayoutInflater mInflater;
     RealmResults<Drop> mResults;
     private AddListener mAddListener;
+    private MarkListener mMarkListener;
+    private Realm mRealm;
 
-    public AdapterDrops(Context context, RealmResults<Drop> results) {
+    public AdapterDrops(Context context, Realm realm, RealmResults<Drop> results) {
         mInflater = LayoutInflater.from(context);
+        mRealm = realm;
         update(results);
     }
 
-    public AdapterDrops(Context context, RealmResults<Drop> results, AddListener addListener) {
+    public AdapterDrops(Context context, Realm realm, RealmResults<Drop> results, AddListener addListener, MarkListener markListener) {
         mInflater = LayoutInflater.from(context);
         mAddListener = addListener;
+        mMarkListener = markListener;
+        mRealm = realm;
         update(results);
     }
 
@@ -71,7 +79,7 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         else{
             Log.d(TAG, "onCreateViewHolder: Row Drop");
             View view = mInflater.inflate(R.layout.row_drop, parent, false);
-            return new DropHolder(view);
+            return new DropHolder(view, mMarkListener);
         }
     }
 
@@ -87,14 +95,37 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     @Override
     public int getItemCount() {
+        if(mResults == null | mResults.isEmpty())
+            return 0;
         return mResults.size() + 1;
     }
 
-    public static class DropHolder extends RecyclerView.ViewHolder {
-        TextView mTextWhat = (TextView) itemView.findViewById(R.id.tv_what);
+    @Override
+    public void onSwipe(int position) {
+        if(position < mResults.size()) {
+            mRealm.beginTransaction();
+            mResults.get(position).removeFromRealm();
+            mRealm.commitTransaction();
+            notifyItemRemoved(position);
+        }
+    }
 
-        public DropHolder(View itemView) {
+    public static class DropHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        TextView mTextWhat;
+        TextView mTextWhen;
+        MarkListener mMarkListener;
+
+        public DropHolder(View itemView, MarkListener listener) {
             super(itemView);
+            itemView.setOnClickListener(this);
+            mTextWhat = (TextView) itemView.findViewById(R.id.tv_what);
+            mTextWhen = (TextView) itemView.findViewById(R.id.tv_when);
+            mMarkListener = listener;
+        }
+
+        @Override
+        public void onClick(View v) {
+            mMarkListener.onMark(getAdapterPosition());
         }
     }
 

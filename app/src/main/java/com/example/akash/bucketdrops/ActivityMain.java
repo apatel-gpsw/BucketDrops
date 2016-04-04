@@ -3,13 +3,12 @@ package com.example.akash.bucketdrops;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +17,8 @@ import com.example.akash.bucketdrops.beans.Drop;
 import adapters.AdapterDrops;
 import adapters.AddListener;
 import adapters.Divider;
+import adapters.MarkListener;
+import adapters.SimpleTouchCallBack;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmResults;
@@ -33,10 +34,25 @@ public class ActivityMain extends AppCompatActivity {
     RealmResults<Drop> mRealmResults;
     AdapterDrops mAdapter;
     View mEmptyView;
-    private AddListener addListener = new AddListener() {
+    private AddListener mAddListener = new AddListener() {
         @Override
         public void add() {
             showDialogAdd();
+        }
+    };
+
+    private RealmChangeListener mChangeListener = new RealmChangeListener() {
+        @Override
+        public void onChange() {
+            Log.d(TAG, "onChange: called");
+            mAdapter.update(mRealmResults);
+        }
+    };
+
+    private MarkListener mMarkListener = new MarkListener() {
+        @Override
+        public void onMark(int position) {
+            showDialogMark(position);
         }
     };
 
@@ -48,7 +64,6 @@ public class ActivityMain extends AppCompatActivity {
         setSupportActionBar(mToolBar);
 
         mEmptyView = findViewById(R.id.empty_drops);
-        initBackGroundImage();
 
         mRecyclerView = (BucketRecyclerView) findViewById(R.id.rv_drops);
         mRecyclerView.addItemDecoration(new Divider(this, LinearLayoutManager.VERTICAL));
@@ -59,10 +74,14 @@ public class ActivityMain extends AppCompatActivity {
 
         mRealm = Realm.getDefaultInstance();
         mRealmResults = mRealm.where(Drop.class).findAllAsync();
-        mAdapter = new AdapterDrops(this, mRealmResults, addListener);
+        mAdapter = new AdapterDrops(this, mRealm, mRealmResults, mAddListener, mMarkListener);
 
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
+
+        SimpleTouchCallBack simpleTouchCallBack = new SimpleTouchCallBack(mAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(simpleTouchCallBack);
+        helper.attachToRecyclerView(mRecyclerView);
 
         mBtnAdd = (Button) findViewById(R.id.btn_add);
         mBtnAdd.setOnClickListener(new View.OnClickListener() {
@@ -72,20 +91,21 @@ public class ActivityMain extends AppCompatActivity {
                 showDialogAdd();
             }
         });
+
+        initBackGroundImage();
     }
-
-    private RealmChangeListener mChangeListener = new RealmChangeListener() {
-        @Override
-        public void onChange() {
-            Log.d(TAG, "onChange: called");
-            mAdapter.update(mRealmResults);
-        }
-    };
-
 
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
         dialog.show(getSupportFragmentManager(), "Add");
+    }
+
+    private void showDialogMark(int position) {
+        DialogMark dialog = new DialogMark();
+        Bundle bundle = new Bundle();
+        bundle.putInt("POSITION", position);
+        dialog.setArguments(bundle);
+        dialog.show(getSupportFragmentManager(), "Mark");
     }
 
     private void initBackGroundImage(){

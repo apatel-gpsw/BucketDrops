@@ -32,5 +32,6 @@
     <dimen name="drop_text_size">16sp</dimen>
     <dimen name="bucket_list_left">12dp</dimen>
     <dimen name="bucket_list_right">24dp</dimen>
+    <dimen name="complete_margin_vertical">96dp</dimen>
 
 </resources>
