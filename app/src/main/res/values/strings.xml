@@ -5,4 +5,9 @@
     <string name="iv_image_description">IV Image</string>
     <string name="et_hint_drop">What is this?</string>
     <string name="mark_completed">Mark Completed</string>
+    <string name="add_sign">Add</string>
+    <string name="descending_date">Most Time Left</string>
+    <string name="ascending_date">Least Time Left</string>
+    <string name="show_complete">Complete</string>
+    <string name="show_incomplete">Inclomplete</string>
 </resources>
