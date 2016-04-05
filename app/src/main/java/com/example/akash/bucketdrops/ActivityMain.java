@@ -16,6 +16,7 @@ import com.example.akash.bucketdrops.beans.Drop;
 
 import adapters.AdapterDrops;
 import adapters.AddListener;
+import adapters.CompleteListener;
 import adapters.Divider;
 import adapters.MarkListener;
 import adapters.SimpleTouchCallBack;
@@ -53,6 +54,14 @@ public class ActivityMain extends AppCompatActivity {
         @Override
         public void onMark(int position) {
             showDialogMark(position);
+        }
+    };
+
+    private CompleteListener mCompleteListener = new CompleteListener(){
+
+        @Override
+        public void onComplete(int position) {
+            mAdapter.markComplete(position);
         }
     };
 
@@ -105,6 +114,7 @@ public class ActivityMain extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putInt("POSITION", position);
         dialog.setArguments(bundle);
+        dialog.setCompleteListener(mCompleteListener);
         dialog.show(getSupportFragmentManager(), "Mark");
     }
 

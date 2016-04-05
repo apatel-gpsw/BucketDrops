@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import adapters.CompleteListener;
+
 /**
  * Created by knighthood on 04/01/16.
  */
@@ -24,11 +26,21 @@ public class DialogMark extends DialogFragment {
             switch (v.getId()) {
                 case R.id.btn_completed:
                     //TODO handle the action here to mark the item as complete
+                    markAsComplete();
                     break;
             }
             dismiss();
         }
     };
+    private CompleteListener mListener;
+
+    private void markAsComplete(){
+        Bundle arguments = getArguments();
+        if (arguments != null && mListener != null) {
+            int position = arguments.getInt("POSITION");
+            mListener.onComplete(position );
+        }
+    }
 
     @Nullable
     @Override
@@ -44,11 +56,9 @@ public class DialogMark extends DialogFragment {
 
         mBtnCompleted = (Button) view.findViewById(R.id.btn_completed);
         mBtnCompleted.setOnClickListener(mBtnClickListener);
+    }
 
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            int position = arguments.getInt("POSITION");
-            Toast.makeText(getActivity(), "position " + position, Toast.LENGTH_SHORT).show();
-        }
+    public void setCompleteListener(CompleteListener mCompleteListener) {
+        mListener = mCompleteListener;
     }
 }
