@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 
 import com.example.akash.bucketdrops.beans.Drop;
 
+import java.util.Calendar;
+
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
@@ -43,9 +45,19 @@ public class DialogAdd extends DialogFragment {
     //TODO Add Date
     private void addAction() {
         String what = mInputWhat.getText().toString();
+        String when = mInputWhen.getDayOfMonth() + "/" + mInputWhen.getMonth() + "/" + mInputWhen.getYear();
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH, mInputWhen.getDayOfMonth());
+        calendar.set(Calendar.YEAR, mInputWhen.getYear());
+        calendar.set(Calendar.MONTH, mInputWhen.getMonth());
+        calendar.set(Calendar.HOUR, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
         long now = System.currentTimeMillis();
         Realm realm = Realm.getDefaultInstance();
-        Drop drop = new Drop(what, now, 0, false);
+        Drop drop = new Drop(what, now, calendar.getTimeInMillis(), false);
         realm.beginTransaction();
         realm.copyToRealm(drop);
         realm.commitTransaction();
@@ -67,11 +79,12 @@ public class DialogAdd extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         mInputWhat = (EditText) view.findViewById(R.id.et_drop);
         mInputWhen = (DatePicker) view.findViewById(R.id.bpv_date);
-        mBtnAdd = (Button) view.findViewById(R.id.btn_add_it);
-        mBtnClose = (ImageButton) view.findViewById(R.id.btn_add_close);
 
+        mBtnAdd = (Button) view.findViewById(R.id.btn_add_it);
+        mBtnAdd.setOnClickListener(mBtnClickLister);
+
+        mBtnClose = (ImageButton) view.findViewById(R.id.btn_add_close);
         mBtnClose.setOnClickListener(mBtnClickLister);
 
-        mBtnAdd.setOnClickListener(mBtnClickLister);
     }
 }

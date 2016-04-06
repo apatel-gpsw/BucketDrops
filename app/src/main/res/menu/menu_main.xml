@@ -7,10 +7,10 @@
         android:title="@string/add_sign"
         app:showAsAction="always" />
     <item
-        android:id="descending_date"
+        android:id="@+id/sort_descending_date"
         android:title="@string/descending_date" />
     <item
-        android:id="@+id/ascending_date"
+        android:id="@+id/sort_ascending_date"
         android:title="@string/ascending_date" />
     <item
         android:id="@+id/show_complete"

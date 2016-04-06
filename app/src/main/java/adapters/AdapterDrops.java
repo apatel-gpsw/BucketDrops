@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +94,7 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             DropHolder dropHolder = (DropHolder) holder;
             Drop drop = mResults.get(position);
             dropHolder.setText(drop.getWhat());
+            dropHolder.setWhen(drop.getWhen());
             dropHolder.setBackground(drop.isCompleted());
         }
         Log.d(TAG, "onBindViewHolder: at position: " + position);
@@ -159,6 +161,10 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 drawable = ContextCompat.getDrawable(mContext, R.drawable.bg_row_drop);
             }
             Util.setBackground(mItemView, drawable);
+        }
+
+        public void setWhen(long when) {
+            mTextWhen.setText(DateUtils.getRelativeTimeSpanString(when, System.currentTimeMillis(), DateUtils.DAY_IN_MILLIS, DateUtils.FORMAT_ABBREV_RELATIVE));
         }
     }
 
