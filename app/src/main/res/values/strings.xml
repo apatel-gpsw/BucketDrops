@@ -10,4 +10,6 @@
     <string name="ascending_date">Least Time Left</string>
     <string name="show_complete">Complete</string>
     <string name="show_incomplete">Inclomplete</string>
+    <string name="str_no_items">No Items to display</string>
+    <string name="sort_none">None</string>
 </resources>

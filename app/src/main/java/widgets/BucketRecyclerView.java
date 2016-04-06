@@ -53,19 +53,19 @@ public class BucketRecyclerView extends RecyclerView {
 
     private void toggleView() {
         if (getAdapter() != null && !mEmptyList.isEmpty() && !mNonEmptyList.isEmpty()) {
+            // No Drops to show
             if (getAdapter().getItemCount() == 0) {
+                // Show Empty List (Image and Add Button) and Hide Non Empty List
+                Util.showHideViews(mEmptyList, mNonEmptyList);
 
-                Util.showViews(mEmptyList);
-
+                // Hide BucketList
                 setVisibility(View.GONE);
-
-                Util.hideViews(mNonEmptyList);
             } else {
-                Util.showViews(mNonEmptyList);
+                // Show Non Empty List and Hide Empty List (Image and Add Button)
+                Util.showHideViews(mNonEmptyList, mEmptyList);
 
+                // Show BucketList
                 setVisibility(View.VISIBLE);
-
-                Util.hideViews(mEmptyList);
             }
         }
     }

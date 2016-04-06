@@ -6,6 +6,10 @@
         android:icon="@drawable/ic_plus"
         android:title="@string/add_sign"
         app:showAsAction="always" />
+
+    <item
+        android:id="@+id/sort_none"
+        android:title="@string/sort_none" />
     <item
         android:id="@+id/sort_descending_date"
         android:title="@string/descending_date" />

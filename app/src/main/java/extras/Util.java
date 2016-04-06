@@ -12,13 +12,11 @@ import java.util.List;
  */
 public class Util {
 
-    public static void showViews(List<View> views) {
-        for (View view : views)
+    public static void showHideViews(List<View> showViews, List<View> hideViews) {
+        for (View view : showViews)
             view.setVisibility(View.VISIBLE);
-    }
 
-    public static void hideViews(List<View> views) {
-        for (View view : views)
+        for (View view : hideViews)
             view.setVisibility(View.GONE);
     }
 

@@ -113,7 +113,9 @@ public class ActivityMain extends AppCompatActivity {
 
         // Realm
         mRealm = Realm.getDefaultInstance();
-        int filterOption = load();
+
+        // Load the drops based on filter stored
+        int filterOption = AppBucketDrops.load(this);
         loadResults(filterOption);
 
         // Views
@@ -151,6 +153,9 @@ public class ActivityMain extends AppCompatActivity {
             case R.id.action_add:
                 showDialogAdd();
                 break;
+            case R.id.sort_none:
+                filterOption = Filter.NONE;
+                break;
             case R.id.sort_descending_date:
                 filterOption = Filter.LEAST_TIME_LEFT;
                 break;
@@ -168,7 +173,7 @@ public class ActivityMain extends AppCompatActivity {
                 break;
         }
         loadResults(filterOption);
-        save(filterOption);
+        AppBucketDrops.save(this, filterOption);
         return handled;
     }
 
@@ -195,27 +200,6 @@ public class ActivityMain extends AppCompatActivity {
                 break;
         }
         mResults.addChangeListener(mChangeListener);
-    }
-
-    /**
-     * Save Selected Filter
-     * @param filterOption
-     */
-    private void save(int filterOption) {
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putInt("filter", filterOption);
-        editor.apply();
-    }
-
-    /**
-     * Load Previously Selected Filter
-     * @return
-     */
-    private int load() {
-        SharedPreferences pref = getPreferences(MODE_PRIVATE);
-        int filterOption = pref.getInt("filter", Filter.NONE);
-        return filterOption;
     }
 
     @Override
