@@ -24,6 +24,7 @@ import adapters.CompleteListener;
 import adapters.Divider;
 import adapters.Filter;
 import adapters.MarkListener;
+import adapters.ResetListener;
 import adapters.SimpleTouchCallBack;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
@@ -83,6 +84,14 @@ public class ActivityMain extends AppCompatActivity {
         }
     };
 
+    private ResetListener mResetListener = new ResetListener() {
+        @Override
+        public void onReset() {
+            AppBucketDrops.save(ActivityMain.this, Filter.NONE);
+            loadResults(Filter.NONE);
+        }
+    };
+
     // When Add is clicked
     private void showDialogAdd() {
         DialogAdd dialog = new DialogAdd();
@@ -130,7 +139,7 @@ public class ActivityMain extends AppCompatActivity {
         mRecycler.setItemAnimator(new DefaultItemAnimator());
 
         // Adapter
-        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener);
+        mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener, mResetListener);
         mAdapter.setHasStableIds(true);
         mRecycler.setAdapter(mAdapter);
 
