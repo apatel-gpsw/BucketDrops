@@ -3,6 +3,7 @@ package com.example.akash.bucketdrops;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -126,9 +127,11 @@ public class ActivityMain extends AppCompatActivity {
         mRecycler.hideIfEmpty(mToolbar);
         mRecycler.showIfEmpty(mEmptyView);
         mRecycler.setLayoutManager(manager);
+        mRecycler.setItemAnimator(new DefaultItemAnimator());
 
         // Adapter
         mAdapter = new AdapterDrops(this, mRealm, mResults, mAddListener, mMarkListener);
+        mAdapter.setHasStableIds(true);
         mRecycler.setAdapter(mAdapter);
 
         // Touch Call Back
