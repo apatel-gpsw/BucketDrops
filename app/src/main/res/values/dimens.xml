@@ -33,5 +33,9 @@
     <dimen name="bucket_list_left">12dp</dimen>
     <dimen name="bucket_list_right">24dp</dimen>
     <dimen name="complete_margin_vertical">96dp</dimen>
+    <dimen name="tv_picker_item_width">96dp</dimen>
+    <dimen name="calendar_text_size">24sp</dimen>
+    <dimen name="picker_radius">4dp</dimen>
+    <dimen name="calendar_padding">16dp</dimen>
 
 </resources>

@@ -18,6 +18,7 @@ import java.util.Calendar;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmObject;
+import widgets.BucketPickerView;
 
 /**
  * Created by knighthood on 3/31/2016.
@@ -26,7 +27,7 @@ public class DialogAdd extends DialogFragment {
 
     private ImageButton mBtnClose;
     private EditText mInputWhat;
-    private DatePicker mInputWhen;
+    private BucketPickerView mInputWhen;
     private Button mBtnAdd;
 
     private View.OnClickListener mBtnClickLister = new View.OnClickListener() {
@@ -45,19 +46,10 @@ public class DialogAdd extends DialogFragment {
     //TODO Add Date
     private void addAction() {
         String what = mInputWhat.getText().toString();
-        String when = mInputWhen.getDayOfMonth() + "/" + mInputWhen.getMonth() + "/" + mInputWhen.getYear();
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.DAY_OF_MONTH, mInputWhen.getDayOfMonth());
-        calendar.set(Calendar.YEAR, mInputWhen.getYear());
-        calendar.set(Calendar.MONTH, mInputWhen.getMonth());
-        calendar.set(Calendar.HOUR, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
 
         long now = System.currentTimeMillis();
         Realm realm = Realm.getDefaultInstance();
-        Drop drop = new Drop(what, now, calendar.getTimeInMillis(), false);
+        Drop drop = new Drop(what, now, mInputWhen.getTime(), false);
         realm.beginTransaction();
         realm.copyToRealm(drop);
         realm.commitTransaction();
@@ -65,6 +57,12 @@ public class DialogAdd extends DialogFragment {
     }
 
     public DialogAdd() {
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogTheme);
     }
 
     @Nullable
@@ -78,7 +76,7 @@ public class DialogAdd extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mInputWhat = (EditText) view.findViewById(R.id.et_drop);
-        mInputWhen = (DatePicker) view.findViewById(R.id.bpv_date);
+        mInputWhen = (BucketPickerView) view.findViewById(R.id.bpv_date);
 
         mBtnAdd = (Button) view.findViewById(R.id.btn_add_it);
         mBtnAdd.setOnClickListener(mBtnClickLister);
