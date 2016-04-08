@@ -1,6 +1,7 @@
 package adapters;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
@@ -187,9 +188,14 @@ public class AdapterDrops extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
             super(itemView);
             mItemView = itemView;
             mContext = itemView.getContext();
+            Typeface typeface = Typeface.createFromAsset(mContext.getAssets(), "fonts/raleway_thin.ttf");
+
             itemView.setOnClickListener(this);
             mTextWhat = (TextView) itemView.findViewById(R.id.tv_what);
+            mTextWhat.setTypeface(typeface);
+
             mTextWhen = (TextView) itemView.findViewById(R.id.tv_when);
+            mTextWhen.setTypeface(typeface);
             mMarkListener = listener;
         }
 

@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="@dimen/iv_logo_size"
-        android:layout_height="@dimen/iv_logo_size"
-        android:src="@drawable/logo"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/iv_logo_margin"
-        android:scaleType="fitXY"
-        android:contentDescription="@string/iv_image_description" />
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/btn_add_text_size"
-        android:layout_margin="@dimen/btn_add_layout_margin"
-        android:paddingLeft="@dimen/btn_add_hor_padding"
-        android:paddingRight="@dimen/btn_add_hor_padding"
-        android:paddingTop="@dimen/btn_add_ver_padding"
-        android:paddingBottom="@dimen/btn_add_ver_padding"
-        android:textAllCaps="false"
-        android:layout_below="@+id/iv_logo"
-        android:fontFamily="@string/btn_add_font_family"
-        android:textColor="@color/btn_add_color"
-        android:background="@drawable/bg_btn_add"
-        android:text="@string/add_drop"/>
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="@dimen/iv_logo_size"
+            android:layout_height="@dimen/iv_logo_size"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/iv_logo_margin"
+            android:contentDescription="@string/iv_image_description"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo" />
 
-
-
-</RelativeLayout>
+        <Button
+            android:id="@+id/btn_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="@dimen/btn_add_layout_margin"
+            android:background="@drawable/bg_btn_add"
+            android:fontFamily="@string/btn_add_font_family"
+            android:paddingBottom="@dimen/btn_add_ver_padding"
+            android:paddingLeft="@dimen/btn_add_hor_padding"
+            android:paddingRight="@dimen/btn_add_hor_padding"
+            android:paddingTop="@dimen/btn_add_ver_padding"
+            android:text="@string/add_drop"
+            android:textAllCaps="false"
+            android:textColor="@color/btn_add_color"
+            android:textSize="@dimen/btn_add_text_size" />
+    </RelativeLayout>
+</ScrollView>

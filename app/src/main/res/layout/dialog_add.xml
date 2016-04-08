@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/bg_dialog">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg_dialog">
+        android:padding="@dimen/btn_add_layout_margin">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tv_title_vertical_margin"
+            android:layout_marginBottom="@dimen/tv_title_vertical_margin"
             android:text="@string/add_drop"
             android:textSize="@dimen/tv_text_title" />
 
@@ -31,13 +34,16 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_title"
             android:hint="@string/et_hint_drop"
+            android:padding="@dimen/calendar_padding"
             android:singleLine="true" />
 
         <widgets.BucketPickerView
             android:id="@+id/bpv_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/et_drop" />
+            android:layout_below="@id/et_drop"
+            android:layout_marginTop="@dimen/date_picker_vertical_margin"
+            android:layout_marginBottom="@dimen/date_picker_vertical_margin"/>
 
         <Button
             android:id="@+id/btn_add_it"
@@ -45,7 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/bpv_date"
             android:text="@string/add_drop"
-            android:textAllCaps="false" />
+            android:background="@drawable/bg_btn_add"
+            android:textAllCaps="false"
+            android:textSize="@dimen/btn_add_text_size"/>
 
         <!--android:textSize="@dimen/btn_add_text_size"-->
 

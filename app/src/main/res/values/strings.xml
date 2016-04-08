@@ -12,4 +12,5 @@
     <string name="show_incomplete">Inclomplete</string>
     <string name="str_no_items">No Items to display</string>
     <string name="sort_none">None</string>
+    <string name="sans_serif_thin">sans_serif_thin</string>
 </resources>

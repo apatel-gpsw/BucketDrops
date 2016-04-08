@@ -3,8 +3,12 @@ package com.example.akash.bucketdrops;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import adapters.Filter;
 import io.realm.Realm;
@@ -40,5 +44,26 @@ public class AppBucketDrops extends Application{
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         int filterOption = pref.getInt("filter", Filter.NONE);
         return filterOption;
+    }
+
+    /**
+     * Change font for a TextView
+     * @param context
+     * @param textView
+     */
+    public static void setFontFamily(Context context, TextView textView){
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/raleway_thin.ttf");
+        textView.setTypeface(typeface);
+    }
+
+    /**
+     * Change font for multiple TextViews
+     * @param context
+     * @param textViews
+     */
+    public static void setFontFamily(Context context, TextView... textViews){
+        Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/raleway_thin.ttf");
+        for (TextView textView : textViews)
+            textView.setTypeface(typeface);
     }
 }
