@@ -1,48 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg_dialog">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/add_drop"
-        android:textSize="@dimen/tv_text_title"/>
-
-    <ImageButton
-        android:id="@+id/btn_add_close"
-        android:layout_width="@dimen/dialog_btn_size"
-        android:layout_height="@dimen/dialog_btn_size"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/tv_title"
-        android:layout_alignBottom="@id/tv_title"
-        android:background="@null"
-        android:src="@drawable/ic_close"/>
-
-    <EditText
-        android:id="@+id/et_drop"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_title"
-        android:hint="@string/et_hint_drop"
-        android:singleLine="true"/>
+        android:layout_height="match_parent"
+        android:background="@color/bg_dialog">
 
-    <widgets.BucketPickerView
-        android:id="@+id/bpv_date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_drop"/>
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_drop"
+            android:textSize="@dimen/tv_text_title" />
 
-    <Button
-        android:id="@+id/btn_add_it"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/add_drop"
-        android:layout_below="@id/bpv_date"
-        android:textAllCaps="false"/>
+        <ImageButton
+            android:id="@+id/btn_add_close"
+            android:layout_width="@dimen/dialog_btn_size"
+            android:layout_height="@dimen/dialog_btn_size"
+            android:layout_alignBottom="@id/tv_title"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@id/tv_title"
+            android:background="@null"
+            android:src="@drawable/ic_close" />
 
-    <!--android:textSize="@dimen/btn_add_text_size"-->
+        <EditText
+            android:id="@+id/et_drop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title"
+            android:hint="@string/et_hint_drop"
+            android:singleLine="true" />
 
-</RelativeLayout>
+        <widgets.BucketPickerView
+            android:id="@+id/bpv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_drop" />
+
+        <Button
+            android:id="@+id/btn_add_it"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bpv_date"
+            android:text="@string/add_drop"
+            android:textAllCaps="false" />
+
+        <!--android:textSize="@dimen/btn_add_text_size"-->
+
+    </RelativeLayout>
+</ScrollView>
